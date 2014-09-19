@@ -1,9 +1,25 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class andersonDice extends PApplet {
+
 int squareSize = 50;    //square size
 int circleSize = 6;     //dot size
 
 ArrayList<Die> dices;
 
-void setup()
+public void setup()
 {
     dices = new ArrayList<Die>();
     size(500,500);
@@ -17,7 +33,7 @@ void setup()
     }  
 }
 
-void draw()
+public void draw()
 {
     drawDice(); 
     textSize(20);
@@ -26,7 +42,7 @@ void draw()
 }
 
 int total_dots = 0;
-void drawDice()
+public void drawDice()
 {
     total_dots = 0;
     background(0);
@@ -38,7 +54,7 @@ void drawDice()
     }
 }
 
-void mousePressed()
+public void mousePressed()
 {
     redraw();
 }
@@ -56,18 +72,18 @@ class Die
         yLocation = y;
     }
 
-    void reroll()
+    public void reroll()
     {
         numDots = (int)(Math.random()*6+1);
         println(numDots);
     }
 
-    void drawEllipse(float x, float y)
+    public void drawEllipse(float x, float y)
     {
         ellipse(xLocation + x, yLocation + y, circleSize, circleSize);
     }
 
-    void show()
+    public void show()
     {
 
         fill((int)(Math.random()*256), (int)(Math.random()*256), (int)(Math.random()*256));
@@ -81,49 +97,58 @@ class Die
 
         else if (numDots == 2)
         {
-            drawEllipse(16.67, 16.67);
-            drawEllipse(33.33, 33.33);    
+            drawEllipse(16.67f, 16.67f);
+            drawEllipse(33.33f, 33.33f);    
         }
         
         else if (numDots == 3)
         {
-            drawEllipse(16.67, 16.67);
-            drawEllipse(33.33, 33.33);
+            drawEllipse(16.67f, 16.67f);
+            drawEllipse(33.33f, 33.33f);
             drawEllipse(25, 25);
         }    
 
         else if (numDots == 4)
         {
-            drawEllipse(16.67, 16.67);
-            drawEllipse(16.67, 33.33);
-            drawEllipse(33.33, 16.67);
-            drawEllipse(33.33, 33.33);
+            drawEllipse(16.67f, 16.67f);
+            drawEllipse(16.67f, 33.33f);
+            drawEllipse(33.33f, 16.67f);
+            drawEllipse(33.33f, 33.33f);
         }    
 
         else if (numDots == 5)
         {
-            drawEllipse(16.67, 16.67);
-            drawEllipse(16.67, 33.33);
-            drawEllipse(33.33, 16.67);
-            drawEllipse(33.33, 33.33);
+            drawEllipse(16.67f, 16.67f);
+            drawEllipse(16.67f, 33.33f);
+            drawEllipse(33.33f, 16.67f);
+            drawEllipse(33.33f, 33.33f);
             drawEllipse(25, 25);
         }    
 
         else if (numDots == 6)
         {
-            drawEllipse(16.67, 16.67);
-            drawEllipse(16.67, 24.5);
-            drawEllipse(16.67, 33.33);
-            drawEllipse(33.33, 16.67);
-            drawEllipse(33.33, 24.5);
-            drawEllipse(33.33, 33.33);
+            drawEllipse(16.67f, 16.67f);
+            drawEllipse(16.67f, 24.5f);
+            drawEllipse(16.67f, 33.33f);
+            drawEllipse(33.33f, 16.67f);
+            drawEllipse(33.33f, 24.5f);
+            drawEllipse(33.33f, 33.33f);
         }  
     } 
 
-    int getNumDots()
+    public int getNumDots()
     {
         return numDots;
     }
 }
 
 
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "andersonDice" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
